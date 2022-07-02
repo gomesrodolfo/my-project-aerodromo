@@ -1,0 +1,32 @@
+[
+  {
+    "CódigoOACI": "SBRB",
+    "CIAD": "AC0001",
+    "Nome": "Plácido de Castro",
+    "Município": "RIO BRANCO",
+    "UF": "Acre",
+    "MunicípioServido": "Rio Branco",
+    "UFSERVIDO": "Acre",
+    "LatGeoPoint": "-9.8683333",
+    "LonGeoPoint": "-67.898056",
+    "Latitude": "09°52'06.0\"S",
+    "Longitude": "067°53'53.0\"W",
+    "Altitude": 193.0,
+    "OperaçãoDiurna": "VFR / IFR - CAT I",
+    "OperaçãoNoturna": "VFR / IFR - CAT I",
+    "Designação1": "06/24",
+    "Comprimento1": "2158,0000",
+    "Largura1": "45,00",
+    "Resistência1": "78/F/D/X/T",
+    "Superfície1": "Asfalto",
+    "Designação2": "",
+    "Comprimento2": "",
+    "Largura2": "",
+    "Resistência2": "",
+    "Superfície2": "",
+    "SITUAÇÃO": "Cadastrado",
+    "ValidadedoRegistro": "23/08/2028",
+    "PortariadeRegistro": "PA2018-2577",
+    "LinkPortaria": "https://pergamum.anac.gov.br/arquivos/PA2018-2577.pdf"
+  }
+]
