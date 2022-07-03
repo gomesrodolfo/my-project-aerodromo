@@ -10,10 +10,13 @@ import { CalculaDistanciasComponent } from './components/calcula_distancias/calc
   declarations: [
     AppComponent,
     HomeComponent,
-    HomeComponent,
-    CalculaDistanciasComponent
+    CalculaDistanciasComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

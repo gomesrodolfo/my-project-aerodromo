@@ -258,11 +258,18 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
     return coordenadasConvertidas;
   }
 
+  // meuObjeto = this.converteStringParaFloat(
+  //   "34° 3' 8'' N",
+  //   "118° 14' 37'' W'",
+  //   "35° 41' 6'' N",
+  //   "139° 45' 5'' E"
+  // );
+
   meuObjeto = this.converteStringParaFloat(
-    "34° 3' 8'' N",
-    "118° 14' 37'' W'",
-    "35° 41' 6'' N",
-    "139° 45' 5'' E"
+    "09° 52' 06.0'' S",
+    "067° 53' 53.0'' W",
+    "20° 38' 47.0'' S",
+    "040° 29' 30.0'' W"
   );
 
   public converteTempoParaGraus(object: Coordenadas) {
@@ -351,7 +358,7 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
     return coordenadasValores;
   }
 
-  teste = this.converteTempoParaGraus(this.meuObjeto);
+  teste1 = this.converteTempoParaGraus(this.meuObjeto);
 
   public encontraDistanciaOrigemDestino(
     valoresDeCoordenadas: CoordenadasSomadas
@@ -406,7 +413,7 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
     return distEntreOrigemDestino;
   }
 
-  teste2 = this.encontraDistanciaOrigemDestino(this.teste);
+  distanciaTotal = this.encontraDistanciaOrigemDestino(this.teste1);
 
   ngOnInit(): void {}
 }
