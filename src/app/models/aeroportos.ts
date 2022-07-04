@@ -1,4 +1,4 @@
-export interface Aeroportos {
+export interface Aeroporto {
   CodigoOACI: string;
   CIAD: string;
   Nome: string;

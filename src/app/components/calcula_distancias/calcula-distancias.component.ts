@@ -1,3 +1,5 @@
+import { AeroportosService } from './../../services/aeroportos.service';
+import { EmployeeService } from './../../employee.service';
 import { Component, OnInit } from '@angular/core';
 
 interface Coordenadas {
@@ -48,6 +50,7 @@ interface CoordenadasSomadas {
   templateUrl: './calcula-distancias.component.html',
   styleUrls: ['./calcula-distancias.component.css'],
 })
+
 export class CalculaDistanciasComponent implements OnInit, Coordenadas {
   origem!: {
     latitude: {
@@ -415,5 +418,12 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
 
   distanciaTotal = this.encontraDistanciaOrigemDestino(this.teste1);
 
-  ngOnInit(): void {}
+  aeroportoService : AeroportosService;
+
+  ngOnInit(): void {
+    this.aeroportoService.selecionarOrigemDestino.subscribe((dado) =>
+      console.log(this.aeroportoService.List())
+    );
+  }
+
 }

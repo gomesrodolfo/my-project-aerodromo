@@ -1,2 +1,26 @@
 <h1 style="text-align: center">Aerodromo!</h1>
-<app-calcula-distancias></app-calcula-distancias>
+
+<form [formGroup]="checkoutForm">
+  <label>Aeroporto de Origem:</label>
+  <br />
+  <select>
+    <option [value]="" *ngFor="let Aeroporto of aeroPortos">
+      {{ Aeroporto.Nome }}
+    </option>
+  </select>
+  <br />
+  <label>Aeroporto Destino:</label>
+  <br />
+  <select>
+    <option
+      [(ngModel)]="Aeroporto.Nome"
+      [value]=""
+      *ngFor="let Aeroporto of aeroPortos"
+    >
+      {{ Aeroporto.Nome }}
+    </option>
+  </select>
+  <!-- <button type="button" (click)="pegaDados(Aeroporto.Nome)">Pegar dados</button> -->
+  <app-calcula-distancias></app-calcula-distancias>
+  <button class="button" type="submit">Purchase</button>
+</form>
