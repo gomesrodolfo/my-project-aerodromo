@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { tap, map, observable } from 'rxjs';
 import { Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
+import jsondata from "../assets/data/Voos.json";
 
 @Component({
   selector: 'app-root',
@@ -57,6 +58,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('INIT APP COMPONENT');
+    
+    //Carrego o JSON em um objeto acessível
+    let aeroJson: any = JSON.parse(JSON.stringify(jsondata));
+    let aeroObject: Aeroporto = <Aeroporto>aeroJson;
+    console.log(aeroObject)
+    // EXEMPLO DE ACESSO AO OBJETO DE AEROPORTOS
+    // console.log(aeroPortos[0]['Nome'],['Latitude'],['Longitude']);
+    // console.log(aeroPortos)
 
     //Carrega o dado JSON em uma lista de aeroportos
     this.service.List().subscribe(
