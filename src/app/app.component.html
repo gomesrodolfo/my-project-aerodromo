@@ -24,10 +24,14 @@
     <option  *ngFor="let aeroDestino of aeroPortos" [value]="aeroDestino.Nome">
       {{ aeroDestino.Nome }}
     </option>
-  </select>
-  <br/>
-  <br/>
-  <button type="submit">Submit</button>
+</select>
+<br/>
+<br/>
+<button type="submit">Submit</button>
 </form>
 
-<!-- <app-calcula-distancias></app-calcula-distancias> -->
+<div class="div-calculo" style="text-align: center">
+  <h1 style="text-align: center">Cálculo de distâncias</h1>
+  <h2>Distancia entre {{AeroOrigem}} e {{AeroDestino}} {{ GetCoordenadasTempoEmGraus }} Km</h2>
+</div>
+

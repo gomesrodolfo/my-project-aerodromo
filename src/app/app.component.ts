@@ -33,6 +33,9 @@ export class AppComponent implements OnInit, OnDestroy {
   GetCoordenadasTempoEmGraus: any;
   CoordenadasSomadas: any;
   Coordenadas: any;
+  AeroOrigem: any;
+  AeroDestino: any;
+
 
   // formBuilder: FormBuilder = new FormBuilder();
 
@@ -60,6 +63,8 @@ export class AppComponent implements OnInit, OnDestroy {
     let nomeDestino: any = Object.values(this.Coordenadas)[1];
     let cooordOrigem: any;
     let cooordDestino: any;
+    this.AeroOrigem = nomeOrigem;
+    this.AeroDestino = nomeDestino;
 
     var aero = this.aeroPortos.filter(
       (Aeroporto) => Aeroporto.Nome == nomeOrigem
@@ -117,9 +122,9 @@ export class AppComponent implements OnInit, OnDestroy {
         this.GetCoordenadasTempo
       );
 
-    // console.log(this.GetCoordenadasTempoEmGraus);
+    console.log(this.GetCoordenadasTempoEmGraus);
 
-    return JSON.parse(JSON.stringify(this.checkoutForm.value));
+    return this.GetCoordenadasTempoEmGraus;
   }
 
   getAeroporto() {
