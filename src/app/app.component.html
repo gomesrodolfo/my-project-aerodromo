@@ -1,26 +1,30 @@
 <h1 style="text-align: center">Aerodromo!</h1>
 
-<form [formGroup]="checkoutForm">
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
   <label>Aeroporto de Origem:</label>
   <br />
-  <select id="mySelect" class="form-control" type="Aeroporto" [(ngModel)]="objectAeroporto" (ngModelChange)="onAddNomeAeroporto(objectAeroporto)">
-    <option [ngValue]="objectAeroporto" *ngFor="let Aeroporto of aeroPortos">
-      {{ Aeroporto.Nome }}
+  <select
+    formControlName="controlAeroportosOrigem"
+    class="form-control-origem"
+    type="Aeroporto"    
+  >
+    <option  *ngFor="let aeroOrigem of aeroPortos" [value]="aeroOrigem.Nome">
+      {{ aeroOrigem.Nome }}
     </option>
   </select>
-  <br />
-  <label>Aeroporto Destino:</label>
-  <br />
-  <!-- <select>
-    <option
-      [(ngModel)]="Aeroporto.Nome"
-      [value]=""
-      *ngFor="let Aeroporto of aeroPortos"
-    >
-      {{ Aeroporto.Nome }}
+
+  <br/>
+  <label>Aeroporto de Destino:</label>
+  <br/>
+  <select
+    formControlName="controlAeroportosDestino"
+    class="form-control-destino"
+    type="Aeroporto"
+  >
+    <option  *ngFor="let aeroDestino of aeroPortos" [value]="aeroDestino.Nome">
+      {{ aeroDestino.Nome }}
     </option>
-  </select> -->
-  <!-- <button type="button" (click)="pegaDados(Aeroporto.Nome)">Pegar dados</button> -->
-  <app-calcula-distancias></app-calcula-distancias>
-  <button (click)="myFunc(Aeroporto)" formtarget="_blank">Submit</button>
+  </select>
+
+  <button type="submit">Submit</button>
 </form>

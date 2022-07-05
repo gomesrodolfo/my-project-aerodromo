@@ -28,10 +28,15 @@ export class AppComponent implements OnInit, OnDestroy {
   objectAeroporto: Aeroporto;
   aeroJson: any = JSON.parse(JSON.stringify(jsondata));
   aeroObject: Aeroporto = <Aeroporto>this.aeroJson;
-
+  Aeroporto: Aeroporto;
   // formBuilder: FormBuilder = new FormBuilder();
 
   //aeroLista: Aeroportos[] = voosData;
+  checkoutForm = this.formBuilder.group({
+    controlAeroportosOrigem: [''],
+    controlAeroportosDestino: ['']
+  });
+
   constructor(
     private service: AeroportosService,
     private formBuilder: FormBuilder
@@ -41,42 +46,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   items = this.service.getItems();
 
-  checkoutForm = this.formBuilder.group({
-    latitude: '',
-    longitude: '',
-  });
-
-  getAeroporto() {
-    return this.getAeroporto;
+  onSubmit() {
+    console.log(JSON.stringify(this.checkoutForm.value));
   }
 
-  onSubmit(): void {
-    // Process checkout data here
-    this.items = this.service.List();
-    console.warn('Your order has been submitted', this.checkoutForm.value);
-    this.checkoutForm.reset();
+  getAeroporto() {
+    return this.Aeroporto;
+  }
+
+  setAeroporto(Aeroporto: Aeroporto) {
+    this.Aeroporto = Aeroporto;
   }
 
   ngOnDestroy(): void {
     console.log(`${this.aeroPortos} foi destruído`);
   }
 
-  // pegaDados(Aeroporto) {
-  //   console.log(this.dados.);
-  // }
-
-  onAddNomeAeroporto(objectAeroporto: Aeroporto) {
-    // Função que foi chamada
-    // debugger;
-    this.nomeAeroporto = objectAeroporto.Nome;
-    console.log('estou no campo nome do aeroporto: ' + this.nomeAeroporto); // Imprimiu o valor no Console log.
-    // console.log(this.string); // outra forma de imprimir.
-    return this.nomeAeroporto;
-  }
-
-  myFunc(nomeAeroporto: Aeroporto) {
-    // debugger
-    console.log(nomeAeroporto); //here you will get input value through ng-model
+  myFunc(Aeroporto: Aeroporto) {
+    console.log(Aeroporto);
   }
 
   ngOnInit(): void {
