@@ -9,7 +9,7 @@
     type="Aeroporto"    
   >
     <option  *ngFor="let aeroOrigem of aeroPortos" [value]="aeroOrigem.Nome">
-      {{ aeroOrigem.Nome }}
+      {{ aeroOrigem?.Nome }}
     </option>
   </select>
 
@@ -22,7 +22,7 @@
     type="Aeroporto"
   >
     <option  *ngFor="let aeroDestino of aeroPortos" [value]="aeroDestino.Nome">
-      {{ aeroDestino.Nome }}
+      {{ aeroDestino?.Nome }}
     </option>
 </select>
 <br/>
@@ -31,7 +31,14 @@
 </form>
 
 <div class="div-calculo" style="text-align: center">
-  <h1 style="text-align: center">Cálculo de distâncias</h1>
+  <h1 style="text-align: center">Cálculo de distâncias:</h1>
   <h2>Distancia entre {{AeroOrigem}} e {{AeroDestino}} {{ GetCoordenadasTempoEmGraus }} Km</h2>
 </div>
 
+<div class="div-calculo" style="text-align: center">
+  <h1>Caminho Mínimo:</h1>
+  <h2 *ngFor="let aero of CaminhoMinimo" style="text-align: center">{{aero.Nome}}</h2>
+  <!-- <h2>{{aero.value}}</h2>
+  <h2>{{AeroDestino}}</h2> -->
+
+</div>
