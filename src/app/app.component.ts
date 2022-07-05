@@ -28,6 +28,9 @@ export class AppComponent implements OnInit, OnDestroy {
   aeroJson: any = JSON.parse(JSON.stringify(jsondata));
   aeroObject: Aeroporto = <Aeroporto>this.aeroJson;
   Aeroporto: Aeroporto;
+  GetCoordenadas: any;
+  GetCoordenadasTempo: any;
+  GetCoordenadasTempoEmGraus: any;
   CoordenadasSomadas: any;
   Coordenadas: any;
 
@@ -64,10 +67,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
     aero.forEach((Aeroporto) => {
       // console.log('Origem: ', Aeroporto);
-      cooordOrigem = {Latitude : Aeroporto['Latitude'], Longitude: Aeroporto['Longitude']}
+      cooordOrigem = {
+        Latitude: Aeroporto['Latitude'],
+        Longitude: Aeroporto['Longitude'],
+      };
     });
 
-    console.log(cooordOrigem);
+    // console.log(cooordOrigem);
 
     var aero = this.aeroPortos.filter(
       (Aeroporto) => Aeroporto.Nome == nomeDestino
@@ -80,7 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
       };
     });
 
-    console.log(cooordDestino);
+    // console.log(cooordDestino);
 
     // this.aeroPortos.forEach((aeroportos, index) => {
     //   if (aeroportos['Nome'] === nomeOrigem) {
@@ -94,6 +100,24 @@ export class AppComponent implements OnInit, OnDestroy {
     // this.Coordenadas = this.calculaDistancia.converteStringParaFloat(
     //   aeroObject[nomeOrigem].
     // );
+
+    this.GetCoordenadas = this.calculaDistancia.converteStringParaFloat(
+      cooordOrigem.Latitude,
+      cooordOrigem.Longitude,
+      cooordDestino.Latitude,
+      cooordDestino.Longitude
+    );
+    // console.log(this.GetCoordenadas);
+    this.GetCoordenadasTempo = this.calculaDistancia.converteTempoParaGraus(
+      this.GetCoordenadas
+    );
+    // console.log(this.GetCoordenadasTempo);
+    this.GetCoordenadasTempoEmGraus =
+      this.calculaDistancia.encontraDistanciaOrigemDestino(
+        this.GetCoordenadasTempo
+      );
+
+    // console.log(this.GetCoordenadasTempoEmGraus);
 
     return JSON.parse(JSON.stringify(this.checkoutForm.value));
   }
