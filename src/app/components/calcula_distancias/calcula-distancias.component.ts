@@ -1,6 +1,7 @@
 import { AeroportosService } from './../../services/aeroportos.service';
 import { EmployeeService } from './../../employee.service';
 import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 interface Coordenadas {
   origem: {
@@ -45,12 +46,15 @@ interface CoordenadasSomadas {
   };
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
 @Component({
   selector: 'app-calcula-distancias',
   templateUrl: './calcula-distancias.component.html',
   styleUrls: ['./calcula-distancias.component.css'],
 })
-
 export class CalculaDistanciasComponent implements OnInit, Coordenadas {
   origem!: {
     latitude: {
@@ -83,7 +87,7 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
 
   constructor() {}
 
-  private converteStringParaFloat(
+  public converteStringParaFloat(
     latitudeOrigem: string,
     longitudeOrigem: string,
     latitudeDestino: string,
@@ -268,6 +272,7 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
   //   "139° 45' 5'' E"
   // );
 
+  //CHAMA PRIMEIRO E RETORNA UM OBJETO
   meuObjeto = this.converteStringParaFloat(
     "09° 52' 06.0'' S",
     "067° 53' 53.0'' W",
@@ -361,8 +366,10 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
     return coordenadasValores;
   }
 
+  //CHAMA converteTempoParaGraus RETORNA UM STRING
   teste1 = this.converteTempoParaGraus(this.meuObjeto);
 
+  //CHAMA POR ULTIMO encontraDistanciaOrigemDestino RETORNA STRING COM CALCULO DE DISTANCIA REALIZADO
   public encontraDistanciaOrigemDestino(
     valoresDeCoordenadas: CoordenadasSomadas
   ) {
@@ -418,12 +425,11 @@ export class CalculaDistanciasComponent implements OnInit, Coordenadas {
 
   distanciaTotal = this.encontraDistanciaOrigemDestino(this.teste1);
 
-  aeroportoService : AeroportosService;
+  aeroportoService: AeroportosService;
 
   ngOnInit(): void {
     this.aeroportoService.selecionarOrigemDestino.subscribe((dado) =>
       console.log(this.aeroportoService.List())
     );
   }
-
 }

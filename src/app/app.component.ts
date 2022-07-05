@@ -9,8 +9,9 @@ import { CalculaDistanciasComponent } from './components/calcula_distancias/calc
 import { HomeComponent } from './components/home/home.component';
 import { tap, map, observable } from 'rxjs';
 import { Observable } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import jsondata from '../assets/data/Voos.json';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-root',
@@ -22,24 +23,26 @@ export class AppComponent implements OnInit, OnDestroy {
   message: string;
   dados: any;
   aeroPortos: Aeroporto[];
-  aeroPortos$: Observable<Aeroporto[]>;
-  MyMap: Map<string, string>;
   nomeAeroporto: string = '';
   objectAeroporto: Aeroporto;
   aeroJson: any = JSON.parse(JSON.stringify(jsondata));
   aeroObject: Aeroporto = <Aeroporto>this.aeroJson;
   Aeroporto: Aeroporto;
+  CoordenadasSomadas: any;
+  Coordenadas: any;
+
   // formBuilder: FormBuilder = new FormBuilder();
 
   //aeroLista: Aeroportos[] = voosData;
   checkoutForm = this.formBuilder.group({
     controlAeroportosOrigem: [''],
-    controlAeroportosDestino: ['']
+    controlAeroportosDestino: [''],
   });
 
   constructor(
     private service: AeroportosService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private calculaDistancia: CalculaDistanciasComponent
   ) {
     console.log('CONSTRUCTOR APP COMPONENT');
   }
@@ -47,7 +50,52 @@ export class AppComponent implements OnInit, OnDestroy {
   items = this.service.getItems();
 
   onSubmit() {
-    console.log(JSON.stringify(this.checkoutForm.value));
+    // debugger
+    // console.log(JSON.stringify(this.checkoutForm.value));
+    this.Coordenadas = JSON.parse(JSON.stringify(this.checkoutForm.value));
+    let nomeOrigem: any = Object.values(this.Coordenadas)[0];
+    let nomeDestino: any = Object.values(this.Coordenadas)[1];
+    let cooordOrigem: any;
+    let cooordDestino: any;
+
+    var aero = this.aeroPortos.filter(
+      (Aeroporto) => Aeroporto.Nome == nomeOrigem
+    );
+
+    aero.forEach((Aeroporto) => {
+      // console.log('Origem: ', Aeroporto);
+      cooordOrigem = {Latitude : Aeroporto['Latitude'], Longitude: Aeroporto['Longitude']}
+    });
+
+    console.log(cooordOrigem);
+
+    var aero = this.aeroPortos.filter(
+      (Aeroporto) => Aeroporto.Nome == nomeDestino
+    );
+
+    aero.forEach((Aeroporto) => {
+      cooordDestino = {
+        Latitude: Aeroporto['Latitude'],
+        Longitude: Aeroporto['Longitude'],
+      };
+    });
+
+    console.log(cooordDestino);
+
+    // this.aeroPortos.forEach((aeroportos, index) => {
+    //   if (aeroportos['Nome'] === nomeOrigem) {
+    //     console.log(nomeOrigem);
+    //   }
+    //   if (aeroportos['Nome'] === nomeDestino) {
+    //     console.log(nomeDestino);
+    //   }
+    // });
+
+    // this.Coordenadas = this.calculaDistancia.converteStringParaFloat(
+    //   aeroObject[nomeOrigem].
+    // );
+
+    return JSON.parse(JSON.stringify(this.checkoutForm.value));
   }
 
   getAeroporto() {
@@ -72,9 +120,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
     //Carrego o JSON em um objeto acessível
 
-    console.log(this.aeroObject);
-    // EXEMPLO DE ACESSO AO OBJETO DE AEROPORTOS
-    console.log(this.aeroObject[0]['Nome'], ['Latitude'], ['Longitude']);
+    // console.log(this.aeroObject);
+    // // EXEMPLO DE ACESSO AO OBJETO DE AEROPORTOS
+    // console.log(this.aeroObject[0]['Nome'], ['Latitude'], ['Longitude']);
     // console.log(aeroPortos)
 
     //Carrega o dado JSON em uma lista de aeroportos
@@ -86,5 +134,14 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
     // console.log(this.dados)
+
+    //CHAMA PRIMEIRO E RETORNA UM OBJETO
+    /*CalculaDistanciasComponent.converteStringParaFloat(latitudeOrigem: string, longitudeOrigem: string, latitudeDestino: string, longitudeDestino: string): Coordenadas*/
+    //converteStringParaFloat;
+
+    // console.log(this.aeroObject[this.Coordenadas[0]]);
+    // this.CoordenadasSomadas = this.calculaDistancia.converteStringParaFloat(
+    //   this.aeroObject[this.Coordenadas[0]].latitude
+    // );
   }
 }
