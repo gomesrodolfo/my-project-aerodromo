@@ -10,7 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { tap, map, observable } from 'rxjs';
 import { Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
-import jsondata from "../assets/data/Voos.json";
+import jsondata from '../assets/data/Voos.json';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +24,11 @@ export class AppComponent implements OnInit, OnDestroy {
   aeroPortos: Aeroporto[];
   aeroPortos$: Observable<Aeroporto[]>;
   MyMap: Map<string, string>;
+  nomeAeroporto: string = '';
+  objectAeroporto: Aeroporto;
+  aeroJson: any = JSON.parse(JSON.stringify(jsondata));
+  aeroObject: Aeroporto = <Aeroporto>this.aeroJson;
+
   // formBuilder: FormBuilder = new FormBuilder();
 
   //aeroLista: Aeroportos[] = voosData;
@@ -41,6 +46,10 @@ export class AppComponent implements OnInit, OnDestroy {
     longitude: '',
   });
 
+  getAeroporto() {
+    return this.getAeroporto;
+  }
+
   onSubmit(): void {
     // Process checkout data here
     this.items = this.service.List();
@@ -56,15 +65,29 @@ export class AppComponent implements OnInit, OnDestroy {
   //   console.log(this.dados.);
   // }
 
+  onAddNomeAeroporto(objectAeroporto: Aeroporto) {
+    // Função que foi chamada
+    // debugger;
+    this.nomeAeroporto = objectAeroporto.Nome;
+    console.log('estou no campo nome do aeroporto: ' + this.nomeAeroporto); // Imprimiu o valor no Console log.
+    // console.log(this.string); // outra forma de imprimir.
+    return this.nomeAeroporto;
+  }
+
+  myFunc(nomeAeroporto: Aeroporto) {
+    // debugger
+    console.log(nomeAeroporto); //here you will get input value through ng-model
+  }
+
   ngOnInit(): void {
+    // debugger;
     console.log('INIT APP COMPONENT');
-    
+
     //Carrego o JSON em um objeto acessível
-    let aeroJson: any = JSON.parse(JSON.stringify(jsondata));
-    let aeroObject: Aeroporto = <Aeroporto>aeroJson;
-    console.log(aeroObject)
+
+    console.log(this.aeroObject);
     // EXEMPLO DE ACESSO AO OBJETO DE AEROPORTOS
-    // console.log(aeroPortos[0]['Nome'],['Latitude'],['Longitude']);
+    console.log(this.aeroObject[0]['Nome'], ['Latitude'], ['Longitude']);
     // console.log(aeroPortos)
 
     //Carrega o dado JSON em uma lista de aeroportos

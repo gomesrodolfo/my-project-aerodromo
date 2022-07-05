@@ -28,7 +28,7 @@ export class AeroportosService {
   }
   List() {
     console.log('peguei o JSON');
-    return this._http.get<Aeroporto[]>(this.url);
+    return this._http.get(this.url);
     //pipe tap para debugar
     // .pipe(
     //   tap(console.log)
@@ -36,11 +36,11 @@ export class AeroportosService {
   }
 
   getItems(){
-    return this._http.get<Aeroporto[]>(this.url);
+    return this._http.get(this.url);
   }
 
   getCalculaOrigemDestino() {
-    this.selecionarOrigemDestino.emit(this._http.get<Aeroporto[]>(this.url));
+    this.selecionarOrigemDestino.emit(this._http.get(this.url));
   }
 }
 

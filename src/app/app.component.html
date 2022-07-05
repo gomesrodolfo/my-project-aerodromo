@@ -3,15 +3,15 @@
 <form [formGroup]="checkoutForm">
   <label>Aeroporto de Origem:</label>
   <br />
-  <select>
-    <option [value]="" *ngFor="let Aeroporto of aeroPortos">
+  <select id="mySelect" class="form-control" type="Aeroporto" [(ngModel)]="objectAeroporto" (ngModelChange)="onAddNomeAeroporto(objectAeroporto)">
+    <option [ngValue]="objectAeroporto" *ngFor="let Aeroporto of aeroPortos">
       {{ Aeroporto.Nome }}
     </option>
   </select>
   <br />
   <label>Aeroporto Destino:</label>
   <br />
-  <select>
+  <!-- <select>
     <option
       [(ngModel)]="Aeroporto.Nome"
       [value]=""
@@ -19,8 +19,8 @@
     >
       {{ Aeroporto.Nome }}
     </option>
-  </select>
+  </select> -->
   <!-- <button type="button" (click)="pegaDados(Aeroporto.Nome)">Pegar dados</button> -->
   <app-calcula-distancias></app-calcula-distancias>
-  <button class="button" type="submit">Purchase</button>
+  <button (click)="myFunc(Aeroporto)" formtarget="_blank">Submit</button>
 </form>
